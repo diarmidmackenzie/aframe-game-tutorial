@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script>
+      function start() {
+
+        const startButton = document.getElementById("start")
+        startButton.style.display = "none"
+
+        alert("Starting Game")
+      }
+    </script>
+  </head>
+  <body>
+    <a-scene vr-mode-ui="enabled: false">
+      <a-entity camera position="0 1.6 0"></a-entity>
+      <a-text position="0 2 -2" value="My Awesome Game!" align="center" color="cyan"
+              animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 3000; easing: linear; loop: true"
+              side="double">
+      </a-text>
+      <a-sky color="black"></a-sky>
+    </a-scene>
+    <button id="start" 
+            style="position: absolute;
+                   top: 50%;
+                   left: 40%;
+                   width: 20%;
+                   height: 15%;
+                   font-size: 150%;
+                   background: #bbbbff"
+             onClick="start()">
+      CLICK HERE TO START
+    </button>
+  </body>
+</html>
