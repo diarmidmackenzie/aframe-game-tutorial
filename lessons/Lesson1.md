@@ -113,6 +113,8 @@ Or you can use a custom RGB value like this `"#ECECEC"`
 >
 > `a-sky` is another A-Frame element, which can be used to describe the background to be used for a 3D scene.  In this case, we specify a simple black background, but we could also use this element to render a 360 image as our background
 
+
+
 ### Tidying some things up
 
 There's a few things we should tidy up.  The 3D framework we are using (A-Frame) was originally developed as a framework for VR experiences.
@@ -134,8 +136,6 @@ And immediately after, add this line:
 ```
 <a-entity camera position="0 1.6 0"></a-entity>
 ```
-
-
 
 This changes will:
 
@@ -172,13 +172,9 @@ The `<a-text>` element should now look something like this (note that the new at
 </a-text>
 ```
 
-
-
 We now have a fancy spinning title!
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson1/step3.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step3.html)
-
-
 
 > In more detail...
 >
@@ -218,9 +214,18 @@ This displays a button, but the button doesn't do anything yet.
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson1/step4.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step4.html)
 
+> Explaining what this code does:
+>
+> - `button` is a basic kind of HTML element that puts a clickable button onto a page
+> - `style` is an attribute that can be set on most 2D HTML elements, that allows control of a wide range of aspects of the element's appearance.  In this case:
+>   - We use "absolute" positioning mode, which means we can specify directly where this element should appear (in other positioning modes, elements are positioned based on the context of other elements around them)
+>   - We set the top of the button 50% of the way down the screen, and the left side of it 40% of the way across the screen
+>   - We set the button width to 20% of the screen width (so with the left side positioned at 40%, it will be in the middle).  We set the height to 15% of the screen height.
+>   - We set a slightly larger than standard font (150%)
+>   - An we set a background color of a pale blue using hex RGB code `"#bbbbff"`.  We could also have used a named color like `"LightGrey"`.
+> - The content of the `button` element, between the tags, is what is displayed on the button.  In this case, some simple text "CLICK HERE TO START".
+
 To make the button have an effect, we need to write some JavaScript.
-
-
 
 Add this additional attribute to the button, again this should be just before the `>`closing brace for the initial `button` tag.
 
@@ -246,7 +251,12 @@ Now, when you press the button, you should see a pop-up like this:
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson1/step5.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step5.html)
 
->  Detailed code explanation to follow
+>  To explain this code:
+>
+>  - `onClick` is a special attribute that can be set on a button to specify a JavaScript function to invoke when the button is clicked.
+>  - We define Javascript functions using the `function` key word.  A function describes a series of commands to execute.
+>  - JavaScript functions can take input parameters, which affect what the function does.  This function has no input parameters, hence the `()` parentheses are empty.
+>  - All this function does at the moment is to create an alert pop-up.  It does this by calling another (built-in) function, `alert()`, passing the message to display as a function parameter.  The alert function is described in full [here](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert).
 
 ### Hiding the button
 
@@ -284,6 +294,13 @@ And in our `start` function, add the following two lines of code.
 ```
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson1/step6.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step6.html)
+
+> Explaining this code...
+>
+> - `document.getElementById()` is another built-in Javascript function which searches the document (i.e. the HTML page) for an element with the specified `id` attribute.  It's described in full [here](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById).
+> - By specifying the `id` attribute on the `button` element, we make it findable by our JavaScript code in this way.  Note that ids such as this should be unique across the whole document, or we might not get the right element.
+> - Our code gets the value returned by `document.getElementById("start")` and stores it in a new constant called `startButton`.  The key word `const` is used to declare a constant.
+> - Having got an element in JavaScript, we can then modify individual attributes (and their properties) of that element directly.  In this case, we change the `display` property of the `style` attribute to `"none"`, which has the effect of hiding the button.
 
 Now, the start button disappears after we click on it.  But this happens *after* the alert, even though the lines of code come before the `alert` line.
 
