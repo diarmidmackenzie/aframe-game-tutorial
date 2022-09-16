@@ -23,7 +23,6 @@ Open a text editor (e.g. VSCode) and paste this code into a new file.
 ```
 
 
-
 Pick a suitable location for your work (e.g. `\Documents\coding\my-game\`) and save this file with the name `index.html`
 
 Now open a browser and view this file in the browser.  The URL will be something like this, but you'll have to modify `<your name>` and maybe some other bits of the path.
@@ -35,6 +34,8 @@ Now open a browser and view this file in the browser.  The URL will be something
 You should see something like this:
 
 ![image-20220916120407933](image-20220916120407933.png)
+
+[Code](view-source:https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step1.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step1.html)
 
 This looks like plain text, but it's actually a part of a 3D environment.  Try holding down the left mouse button and moving it around.  You can also used WASD to move your viewpoint around the text.
 
@@ -114,7 +115,7 @@ Or you can use a custom RGB value like this `"#ECECEC"`
 
 ### Tidying some things up
 
-There's a few things we shoudl tidy up.  The 3D framework we are using (A-Frame) was originally developed as a framework for VR experiences.
+There's a few things we should tidy up.  The 3D framework we are using (A-Frame) was originally developed as a framework for VR experiences.
 
 Since we're not building for VR (yet!) we need to tweak a few things from their defaults.
 
@@ -140,6 +141,8 @@ This changes will:
 
 - disable the "VR" button in the bottom right
 - disable the ability to move your view with the mouse & WASD.  We'll add this back in later when we need it in our game.
+
+[Code](view-source:https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step2.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step2.html)
 
 >  Explaining the code in a bit more detail:
 >
@@ -172,6 +175,8 @@ The `<a-text>` element should now look something like this (note that the new at
 
 
 We now have a fancy spinning title!
+
+[Code](view-source:https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step3.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step3.html)
 
 
 
@@ -211,6 +216,8 @@ Now let's add a button to start the game.  Add the following code just after `</
 
 This displays a button, but the button doesn't do anything yet.
 
+[Code](view-source:https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step4.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step4.html)
+
 To make the button have an effect, we need to write some JavaScript.
 
 
@@ -237,7 +244,7 @@ Now, when you press the button, you should see a pop-up like this:
 
 ![image-20220916122347870](image-20220916122347870.png)
 
-
+[Code](view-source:https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step5.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step5.html)
 
 >  Detailed code explanation to follow
 
@@ -276,7 +283,7 @@ And in our `start` function, add the following two lines of code.
         startButton.style.display = "none"
 ```
 
-
+[Code](view-source:https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step6.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step6.html)
 
 Now, the start button disappears after we click on it.  But this happens *after* the alert, even though the lines of code come before the `alert` line.
 
@@ -297,6 +304,7 @@ to this:
 ```
 
 
+[Code](view-source:https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step7.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step7.html)
 
 >  Detailed code explanation to follow
 
@@ -328,7 +336,7 @@ and add the following two lines inside the `start()` function, just before `setT
         const gameTitle = document.getElementById("gameTitle")
         gameTitle.setAttribute("visible", false)
 ```
-
+[Code](view-source:https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step8.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step8.html)
 
 
 >  Detailed code explanation to follow
@@ -360,6 +368,8 @@ And add the following line of code at the end of the `start()` function:
           gameOver()
         }, 3000)
 ```
+
+[Code](view-source:https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step9.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step9.html)
 
 > Detailed code explanation to follow
 
