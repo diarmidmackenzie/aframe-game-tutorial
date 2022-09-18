@@ -1,10 +1,30 @@
 # Lesson 1 - Creating a Title Page
 
-This lesson creates a simple title page for our game.  We use this as a way to gently introduce a range of important HTML and JavaScript concepts.
+This lesson creates a simple title page for our game.  We use this as a way to gently introduce a range of important HTML and 
+
+JavaScript concepts.
+
+### This Lesson's New Tool
+
+Each lesson will begin by introducting a new tool.
+
+Our first tool is a text editor, which can be used to create and edit plain text files locally on your computer.
+
+I'd recommend [Visual Studio Code](https://code.visualstudio.com/) as a text editor, but if you prefer to use a different text editor, that should be fine.
+
+A text editor allows you to create, modify and save text files.  Many text editors (including Visual Studio Code) have features that assist with development of code, such as automatically colouring code based on syntax, highlighting matching parentheses/brackets, indenting, and so on.
+
+
+
+![image-20220918142329208](image-20220918142329208.png)
+
+It's also possible to write code in your browser, storing your code in the cloud using a service like [glitch.com](https://glitch.com/).  If you want to do that, you'll be able to follow along for most of this tutorial, but there will be a few places where you'll need to do things differently  (serving / viewing pages, version control etc.), and you'll need to figure these out for yourself.
+
+
 
 ### Our first piece of code
 
-Open a text editor (e.g. VSCode) and paste this code into a new file.
+Within you r text editor, copy and paste this code into a new file (or type it in, if you prefer)
 
 ```
 <!DOCTYPE html>
@@ -25,19 +45,17 @@ Open a text editor (e.g. VSCode) and paste this code into a new file.
 
 Pick a suitable location for your work (e.g. `\Documents\coding\my-game\`) and save this file with the name `index.html`
 
-Now open a browser and view this file in the browser.  The URL will be something like this, but you'll have to modify `<your name>` and maybe some other bits of the path.
+Now view this file in your browser (any modern browser should be fine, but this tutorial is written assuming you are using Chrome).  On Windows, the easiest way to open the file in a browser is to navigate to the file in Explorer, then right-click > Open with... > Chrome.
 
-`file:///C:/Users/<your name>/Documents/coding.my-game/index.html`
+![image-20220918143448338](image-20220918143448338.png)
 
-
-
-You should see something like this:
+Within your browser, you should see something like this:
 
 ![image-20220916120407933](image-20220916120407933.png)
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson1/step1.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step1.html)
 
-This looks like plain text, but it's actually a part of a 3D environment.  Try holding down the left mouse button and moving it around.  You can also used WASD to move your viewpoint around the text.
+This looks like simple text, but it's actually a part of a 3D environment.  Try holding down the left mouse button and moving it around.  You can also used WASD to move your viewpoint around the text.
 
 
 Now change the text "My Awesome Game!" in the code above to whatever you'd like to name your game.  And you can change the text color "cyan" and the background color "black" as you wish.
