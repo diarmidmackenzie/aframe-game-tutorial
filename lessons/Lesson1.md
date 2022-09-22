@@ -6,7 +6,7 @@ JavaScript concepts.
 
 ### This Lesson's New Tool
 
-Each lesson will begin by introducting a new tool.
+Each lesson will begin by introducing a new tool.
 
 Our first tool is a text editor, which can be used to create and edit plain text files locally on your computer.
 
@@ -65,20 +65,20 @@ https://www.w3schools.com/colors/colors_names.asp
 
 Or you can use a custom RGB value like this `"#ECECEC"`
 
-> Here's a line-by-line explanation of the code
->
+Here's a line-by-line explanation of the code...
+
 > ```
-> <!DOCTYPE html>
+><!DOCTYPE html>
 > ```
->
+> 
 > This line just declares that this is an HTML document.
 >
 > ```
-> <html>
+><html>
 > ...
 > </html>
 > ```
->
+> 
 > An HTML document is made up of elements, which can be nested inside one another.
 >
 > An element begins with an opening tag like this `<tag>` and ends with a closing tag like this `</tag>`
@@ -88,47 +88,47 @@ Or you can use a custom RGB value like this `"#ECECEC"`
 > The top-level element for any HTML document uses the `html` tag.
 >
 > ```
->   <head>
->     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+><head>
+>  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
 >   </head>
-> ```
->
+>    ```
+>   
 > Inside the `html` element, there are two key elements, the `head` and the `body`.   The `head` is loaded first, and sets up things that can be used within the `body`
 >
 > In the `head` above, we set up just one thing, the [A-Frame JavaScript library](https://aframe.io/) (we're using version 1.3.0, which is the latest available version).  By default, HTML only offers 2D layout.  A-Frame extends HTML in a way that allows us to create 3D elements inside web pages as well.  It defines elements that we'll use below such as `a-scene`, `a-text` and `a-sky`
 >
 > ```
->   <body>
->   ...
+><body>
+> ...
 >   </body>
-> ```
->
+>   ```
+>   
 > After the `head` element, we have the `body` element, which contains the actual content to be displayed on the webpage.  It can refer to things defined in the `head` element.
 >
 > ```
->     <a-scene>
->     ...
+> <a-scene>
+>  ...
 >     </a-scene>
-> ```
->
+>    ```
+>    
 > An HTML page using A-Frame can only contain one 3D scene.  The `a-scene` element is used to define that 3D scene.
 >
->  ```
->       <a-text position="0 2 -2" value="My Awesome Game!" align="center" color="cyan">
->       </a-text>
 > ```
->
+>   <a-text position="0 2 -2" value="My Awesome Game!" align="center" color="cyan">
+>     </a-text>
+>    ```
+>    
 > `a-text` is another element defined by A-Frame.  This can be used to display some text within a 3D scene.  It has various attributes that can be set.  Here we set up:
 >
 > - it's position (0m (i.e. centered) left-right, 2m up, 2m back from the camera).  Note that the default camera is positioned 1.6m above the ground, so 2m up is just above the camera.
-> - the text to display in the `value` attribute
+>- the text to display in the `value` attribute
 > - the alignment: the specified position is in the center of the text.
 > - the color of the text (cyan).
->
+> 
 > ```
-> <a-sky color="black"></a-sky>
+><a-sky color="black"></a-sky>
 > ```
->
+> 
 > `a-sky` is another A-Frame element, which can be used to describe the background to be used for a 3D scene.  In this case, we specify a simple black background, but we could also use this element to render a 360 image as our background
 
 
@@ -162,9 +162,9 @@ This changes will:
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson1/step2.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step2.html)
 
->  Explaining the code in a bit more detail:
->
-> `vr-mode-ui` is an A-Frame component that can be set as an attribute of `a-scene` , giving control over the VR mode UI.  It is described [here](https://aframe.io/docs/1.3.0/components/vr-mode-ui.html).  In this case, we use it to disable (and hence hide) the VR mode UI.
+Explaining the code in a bit more detail:
+
+>  `vr-mode-ui` is an A-Frame component that can be set as an attribute of `a-scene` , giving control over the VR mode UI.  It is described [here](https://aframe.io/docs/1.3.0/components/vr-mode-ui.html).  In this case, we use it to disable (and hence hide) the VR mode UI.
 >
 > Every A-Frame scene must have a camera, but if one idn't included, A-Frame includes one by default, and adds mouse & WASD controls.
 >
@@ -194,8 +194,8 @@ We now have a fancy spinning title!
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson1/step3.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step3.html)
 
-> In more detail...
->
+In more detail...
+
 > The `animation` component is a powerful A-Frame component that can be set as an attribute on most elements.
 >
 > It is described in full [here](https://aframe.io/docs/1.3.0/components/animation.html#sidebar).
@@ -203,11 +203,11 @@ We now have a fancy spinning title!
 > In our setup, we specify:
 >
 > - Which property of the text to animate - in this case, its rotation
-> - Start and end values for the rotation.  We can rotate around any of 3 different axes (x - left-right, y - top-bottom, or z-front-back).  Here's we've specified a full turn (360 degree) rotation about the vertical (y) axis.
+>- Start and end values for the rotation.  We can rotate around any of 3 different axes (x - left-right, y - top-bottom, or z-front-back).  Here's we've specified a full turn (360 degree) rotation about the vertical (y) axis.
 > - `dur` species the duration of the animation in milliseconds.  3000 msecs = 3 seconds.
 > - `easing: linear` means that the animation moves at a constant pace.  Other [easing options](https://aframe.io/docs/1.3.0/components/animation.html#easings) allow for animations that accelerate or decelerate.
 > - `loop: true` means that the animation loops.  Without this property, the animation would just run once.
->
+> 
 > The `side: "double"` attribute ensures that the text is rendered on both sides.  By default most 3D graphics only render one side, for efficiency reasons.  Without this setting, the text would disappear when it was turned away from us.
 
 
@@ -232,10 +232,10 @@ This displays a button, but the button doesn't do anything yet.
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson1/step4.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step4.html)
 
-> Explaining what this code does:
->
+Explaining what this code does:
+
 > - `button` is a basic kind of HTML element that puts a clickable button onto a page
-> - `style` is an attribute that can be set on most 2D HTML elements, that allows control of a wide range of aspects of the element's appearance.  In this case:
+>- `style` is an attribute that can be set on most 2D HTML elements, that allows control of a wide range of aspects of the element's appearance.  In this case:
 >   - We use "absolute" positioning mode, which means we can specify directly where this element should appear (in other positioning modes, elements are positioned based on the context of other elements around them)
 >   - We set the top of the button 50% of the way down the screen, and the left side of it 40% of the way across the screen
 >   - We set the button width to 20% of the screen width (so with the left side positioned at 40%, it will be in the middle).  We set the height to 15% of the screen height.
@@ -269,10 +269,10 @@ Now, when you press the button, you should see a pop-up like this:
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson1/step5.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step5.html)
 
->  To explain this code:
->
+To explain this code:
+
 >  - `onClick` is a special attribute that can be set on a button to specify a JavaScript function to invoke when the button is clicked.
->  - We define Javascript functions using the `function` key word.  A function describes a series of commands to execute.
+>- We define Javascript functions using the `function` key word.  A function describes a series of commands to execute.
 >  - JavaScript functions can take input parameters, which affect what the function does.  This function has no input parameters, hence the `()` parentheses are empty.
 >  - All this function does at the moment is to create an alert pop-up.  It does this by calling another (built-in) function, `alert()`, passing the message to display as a function parameter.  The alert function is described in full [here](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert).
 
@@ -313,10 +313,10 @@ And in our `start` function, add the following two lines of code.
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson1/step6.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step6.html)
 
-> Explaining this code...
->
+Explaining this code...
+
 > - `document.getElementById()` is another built-in Javascript function which searches the document (i.e. the HTML page) for an element with the specified `id` attribute.  It's described in full [here](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById).
-> - By specifying the `id` attribute on the `button` element, we make it findable by our JavaScript code in this way.  Note that ids such as this should be unique across the whole document, or we might not get the right element.
+>- By specifying the `id` attribute on the `button` element, we make it findable by our JavaScript code in this way.  Note that ids such as this should be unique across the whole document, or we might not get the right element.
 > - Our code gets the value returned by `document.getElementById("start")` and stores it in a new constant called `startButton`.  The key word `const` is used to declare a constant.
 > - Having got an element in JavaScript, we can then modify individual attributes (and their properties) of that element directly.  In this case, we change the `display` property of the `style` attribute to `"none"`, which has the effect of hiding the button.
 
@@ -338,10 +338,38 @@ to this:
         }, 100)
 ```
 
-
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson1/step7.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step7.html)
 
->  Detailed code explanation to follow
+Explaining this code...
+
+>  The problem here is that the changes that we make to the page by updating `startButton.style.display` don't happen instantly, whereas the `alert` command does act instantly, and then blocks further updates to the page.
+>
+>  The result is that we see the alert pop-up instantly, but the hiding of the button doesn't occur until the alert pop-up is dismissed, and updates to the page can begin again.
+>
+>  The `setTimeout` function is another built-in JavaScript function that we can use to work around this.  It takes two parameters: a function, and a timer (in milliseconds).  It executes the function *after* the specified number of milliseconds.
+>
+>  The code `() => {...}` defines a function, with the function content being whatever appears between the `{} `curly brackets.
+>
+>  This is known as an "arrow function" and it's just a different way of defining a function.  There are some subtle differences, but there's no need to worry about them for now.
+>
+>  We could also have written the code like this:
+>
+>  ```
+>  function showAlert() {
+>    alert("Starting Game")
+>  }
+>  setTimeout(showAlert, 100)
+>  ```
+>
+>  ... or like this...
+>
+>  ```
+>  setTimeout(function showAlert() {
+>    alert("Starting Game")
+>  }, 100)
+>  ```
+>
+>  There are some subtle differences (which we'll come to later) but for now it's enough to just know that there's two different ways of defining functions, the `function` keyword and the `=>` arrow function construct, which are pretty-much interchangeable.
 
 ### Hiding the title
 
@@ -373,8 +401,14 @@ and add the following two lines inside the `start()` function, just before `setT
 ```
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson1/step8.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step8.html)
 
+An explanation of this code...
 
->  Detailed code explanation to follow
+
+>  Unlike 2D HTML elements, we don't use a `style` attribute to control the display of 3D elements.  We use a range of different attributes for different aspects of the element's display.  E.g. `position` for position, `scale` for scale etc.
+>
+>  To control a 3D element's visibility, we use the attribute `visible`, and setting this to `false` causes the element to be hidden.
+>
+>  A key benefit of hiding the element, rather than deleting it, is that all the other attributes of the element remain (its position, the text it displays etc.), so when we want to show it again we can just set `visible` to `true`, rather than having to recreate the whole element.
 
 ### Back to the title page
 
@@ -399,14 +433,20 @@ Add the following new function inside the `<script>` tags:
 And add the following line of code at the end of the `start()` function:
 
 ```
-        setTimeout(() => {
-          gameOver()
-        }, 3000)
+        setTimeout(gameOver, 3000)
 ```
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson1/step9.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson1/step9.html)
 
-> Detailed code explanation to follow
+An explanation of this code.
+
+> This code re-uses the concepts we introduced in the last few steps, to reinstate the title page when the game "ends".
+>
+> The start button's display style is set to `block` (which is the default HTML display style), and the `visible` attribute on the `gameTitle` element is set back to `true`.
+>
+> The `start` function sets a 3 second timeout, after which the `gameOver` function is called.
+>
+> Note the difference between `gameOver()` which is an instruction to execute the `gameOver` function immediately and `gameOver` which is a reference to the function that can be passed as an argument to the `setTimeout` function.
 
 ### Recap
 
