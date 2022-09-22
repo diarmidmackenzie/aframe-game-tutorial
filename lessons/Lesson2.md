@@ -686,6 +686,8 @@ to read
 if (event.key === " " && !event.repeat) {
 ```
 
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step10.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step10.html)
+
 Explaining this code...
 
 > We're using two new logical operators here, && (AND) and ! (NOT)
