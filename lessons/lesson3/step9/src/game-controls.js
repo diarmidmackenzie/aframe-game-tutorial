@@ -4,10 +4,8 @@ AFRAME.registerComponent('game-controls', {
 
     this.stepForwards = this.stepForwards.bind(this)
     this.keyDown = this.keyDown.bind(this)
-    this.collision = this.collision.bind(this)
     window.addEventListener("click", this.stepForwards)
     window.addEventListener("keydown", this.keyDown)
-    window.addEventListener("collision", this.collision)
   },
 
   stepForwards() {
@@ -23,10 +21,6 @@ AFRAME.registerComponent('game-controls', {
     if (event.key === " " && !event.repeat) {
       this.stepForwards()
     }
-  },
-
-  collision() {
-    this.el.emit("game-over")
   }
 
 })
