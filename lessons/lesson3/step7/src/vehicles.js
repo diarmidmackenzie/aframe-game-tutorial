@@ -82,9 +82,6 @@ AFRAME.registerComponent('collision-check', {
     this.thisBox.expandByScalar(-0.001)
 
     if (this.thisBox.intersectsBox(this.targetBox)) {
-      console.log("Collision!!")
-      console.log(this.targetBox)
-      console.log(this.thisBox)
       alert(`collision!\n${JSON.stringify(this.targetBox)}\n${JSON.stringify(this.thisBox)}`)
     }
   }

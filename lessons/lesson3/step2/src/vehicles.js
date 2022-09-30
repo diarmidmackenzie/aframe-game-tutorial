@@ -40,10 +40,6 @@ AFRAME.registerComponent('z-movement', {
     speed: {type: 'number', default: 3},
   },
 
-  init() {
-    
-  },
-
   tick(time, timeDelta) {
 
     const delta = this.data.speed * timeDelta / 1000
