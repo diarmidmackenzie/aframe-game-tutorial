@@ -2,7 +2,7 @@
 
 In this lesson we add vehicles to the roads, and put some collision detection in place.
 
-See this [demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step9.html) for a preview of what we're going to get to by the end of this lesson.
+See this [demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step9/index.html) for a preview of what we're going to get to by the end of this lesson.
 
 Click the Mouse, or press Space Bar to advance your cute little cube safely across the roads, taking care to avoid the vehicles...
 
@@ -76,7 +76,7 @@ And modify the HTML for our roads to the following (adding a `road` component to
         </a-box>
 ```
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step1.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step1.html)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step1) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step1/index.html)
 
 With these changes, we should see some vehicles (for now, they are just blue rectangles) distributed on our roads:
 
@@ -119,7 +119,7 @@ And when we create the vehicles, we set `z-movement` to the appropriate value:
 vehicle.setAttribute("z-movement", {speed: this.data.speed})
 ```
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step2.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step2.html)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step2) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step2/index.html)
 
 >  Explanation of code to follow
 
@@ -162,7 +162,7 @@ And finally, include values for the two new schema properties where we set `z-mo
                                         loopUpper: roadLength/2})
 ```
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step3.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step3.html)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step3) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step3/index.html)
 
 >  Explanation of code to follow
 
@@ -204,7 +204,7 @@ And set this component on each vehicle by adding this line immediately after set
     vehicle.setAttribute("collision-check", "target: #player")
 ```
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step4.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step4.html)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step4.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step4/index.html)
 
 >  Explanation of code to follow
 
@@ -222,7 +222,7 @@ Update the `alert` in the `collision-check` component to the following.
       alert(`collision!\n${JSON.stringify(this.targetBox)}\n${JSON.stringify(this.thisBox)}`)
 ```
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step5.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step5.html)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step5.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step5/index.html)
 
 This will output the two bounding boxes that are being checked for collisions.
 
@@ -264,7 +264,7 @@ With these:
 
 By wrapping the camera with an additional `camera-rig` entity, with the reverse rotation that we had applied to the `gameArea`, we keep the same camera view, while aligning the `gameArea` with world space, making our collisions much more accurate.
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step6.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step6.html)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step6.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step6/index.html)
 
 
 
@@ -296,7 +296,7 @@ We can do this by adding one line to the `collision-check` component, before mak
 this.thisBox.expandByScalar(-0.001)
 ```
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step7.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step7.html)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step7.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step7/index.html)
 
 
 
@@ -364,7 +364,7 @@ Finally, in `vehciles.js` remove the `alert` and replace it with this:
       this.el.emit("game-over")
 ```
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step8.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step8.html)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step8.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step8/index.html)
 
 
 
@@ -387,7 +387,7 @@ In `title.js`, at the start of the `gameOver` function, add these lines:
   gameArea.play()
 ```
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step9.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step9.html)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step9.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step9/index.html)
 
 >  Explanation of code to follow
 
@@ -408,6 +408,4 @@ In getting to this stage, we've used various new concepts.
 - `pause` and `play` on parts of an A-Frame `scene`
 
 We've also learned how to use version control (using Git and GitHub Desktop) to keep track of our source code as it evolves.
-
-
 
