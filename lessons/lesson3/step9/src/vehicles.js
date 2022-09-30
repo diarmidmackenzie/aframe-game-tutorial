@@ -25,6 +25,7 @@ AFRAME.registerComponent('road', {
     vehicle.setAttribute("z-movement", {speed: this.data.speed,
                                         loopLower: -roadLength/2,
                                         loopUpper: roadLength/2})
+    vehicle.setAttribute("collision-check", "target: #player")
     vehicle.object3D.position.set(0, 0.5, zPosition)
     this.el.appendChild(vehicle)
 
@@ -44,6 +45,7 @@ AFRAME.registerComponent('z-movement', {
     loopUpper: {type: 'number', default: 100},
   },
 
+
   tick(time, timeDelta) {
 
     const delta = this.data.speed * timeDelta / 1000
@@ -57,6 +59,30 @@ AFRAME.registerComponent('z-movement', {
 
     if (this.el.object3D.position.z < this.data.loopLower) {
       this.el.object3D.position.z += loopLength
+    }
+  }
+})
+
+AFRAME.registerComponent('collision-check', {
+
+  schema: {
+    target: {type: 'selector', default: '#player'}
+  },
+
+  init() {
+
+    this.targetBox = new THREE.Box3()
+    this.thisBox = new THREE.Box3()
+  },
+
+  tick() {
+
+    this.targetBox.setFromObject(this.data.target.object3D)
+    this.thisBox.setFromObject(this.el.object3D)
+    this.thisBox.expandByScalar(-0.001)
+
+    if (this.thisBox.intersectsBox(this.targetBox)) {
+      this.el.emit("collision")
     }
   }
 })

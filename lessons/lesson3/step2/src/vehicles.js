@@ -22,7 +22,7 @@ AFRAME.registerComponent('road', {
     vehicle.setAttribute("depth", 2)
     vehicle.setAttribute("id", `${this.el.id}-vehicle-${index}`)
     vehicle.setAttribute("color", "blue")
-    vehicle.setAttribute("linear-movement", {x: 0, y: 0, z: this.data.speed})
+    vehicle.setAttribute("z-movement", {speed: this.data.speed})
     vehicle.object3D.position.set(0, 0.5, zPosition)
     this.el.appendChild(vehicle)
 
@@ -34,20 +34,19 @@ AFRAME.registerComponent('road', {
   }
 })
 
-AFRAME.registerComponent('linear-movement', {
+AFRAME.registerComponent('z-movement', {
 
   schema: {
-    type: 'vec3', default: {x: 0, y: 0, z: 0}
+    speed: {type: 'number', default: 3},
   },
 
   init() {
-    this.deltaVec = new THREE.Vector3()
+    
   },
 
   tick(time, timeDelta) {
 
-    this.deltaVec.copy(this.data)
-    this.deltaVec.multiplyScalar(timeDelta / 1000)
-    this.el.object3D.position.add(this.deltaVec)
+    const delta = this.data.speed * timeDelta / 1000
+    this.el.object3D.position.z += delta
   }
 })
