@@ -82,7 +82,7 @@ AFRAME.registerComponent('collision-check', {
     this.thisBox.expandByScalar(-0.001)
 
     if (this.thisBox.intersectsBox(this.targetBox)) {
-      this.el.emit("collision")
+      this.el.emit("game-over")
     }
   }
 })

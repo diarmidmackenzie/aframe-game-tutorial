@@ -22,5 +22,4 @@ AFRAME.registerComponent('game-controls', {
       this.stepForwards()
     }
   }
-
 })
