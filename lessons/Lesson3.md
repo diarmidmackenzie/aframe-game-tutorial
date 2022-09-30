@@ -204,7 +204,7 @@ And set this component on each vehicle by adding this line immediately after set
     vehicle.setAttribute("collision-check", "target: #player")
 ```
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step4.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step4/index.html)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step4) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step4/index.html)
 
 >  Explanation of code to follow
 
@@ -222,7 +222,7 @@ Update the `alert` in the `collision-check` component to the following.
       alert(`collision!\n${JSON.stringify(this.targetBox)}\n${JSON.stringify(this.thisBox)}`)
 ```
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step5.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step5/index.html)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step5) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step5/index.html)
 
 This will output the two bounding boxes that are being checked for collisions.
 
@@ -264,7 +264,7 @@ With these:
 
 By wrapping the camera with an additional `camera-rig` entity, with the reverse rotation that we had applied to the `gameArea`, we keep the same camera view, while aligning the `gameArea` with world space, making our collisions much more accurate.
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step6.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step6/index.html)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step6) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step6/index.html)
 
 
 
@@ -296,7 +296,7 @@ We can do this by adding one line to the `collision-check` component, before mak
 this.thisBox.expandByScalar(-0.001)
 ```
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step7.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step7/index.html)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step7) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step7/index.html)
 
 
 
@@ -364,7 +364,7 @@ Finally, in `vehciles.js` remove the `alert` and replace it with this:
       this.el.emit("game-over")
 ```
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step8.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step8/index.html)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step8) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step8/index.html)
 
 
 
@@ -387,7 +387,7 @@ In `title.js`, at the start of the `gameOver` function, add these lines:
   gameArea.play()
 ```
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step9.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step9/index.html)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step9) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step9/index.html)
 
 >  Explanation of code to follow
 
