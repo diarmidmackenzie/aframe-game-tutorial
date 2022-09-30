@@ -2,7 +2,7 @@
 
 In this lesson we start putting in place the beginnings of an actual game.  We're going to build a simple arcade game in the style of ["Crossy Road"](https://www.crossyroad.com/).
 
-See this [demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step10) for a preview of what we're going to get to by the end of this lesson.
+See this [demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step10/index.html) for a preview of what we're going to get to by the end of this lesson.
 
 Click the Mouse, or press Space Bar to advance your cute little cube safely across the (spookily empty) roads...
 
@@ -85,7 +85,7 @@ Let's start by adding this to our HTML, inside the `<a-scene>`, after the `<a-sk
       </a-entity>
 ```
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step1/) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step1)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step1.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step1/index.html)
 
 This gives us a large green cube, in front of (and a little below) the camera.  For now, it's present on the title page *and* when we start the game (we'll fix that up shortly)
 
@@ -129,7 +129,7 @@ Now, in the JavaScript in the `start()` function, add these two lines:
         gameArea.setAttribute("visible", false)
 ```
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step2) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step2)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step2.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step2/index.html)
 
 Now, the game area is shown when the game starts, and hidden again
 
@@ -162,7 +162,7 @@ What this gives us is:
 - A single white cube, which is our avatar (for now - we'll give it a bit more personality later!)
 - Three black strips representing roads to cross.
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step3) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step3)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step3.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step3/index.html)
 
 In your browser, you should see something like this:
 
@@ -238,7 +238,7 @@ Now, in our JavaScript code
   setActiveCamera("title-camera")
   ```
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step4) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step4)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step4.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step4/index.html)
 
 We now have a new camera, positioned above & pointing down at the game area.  The game area itself is rotated at an angle.  And we switch to the new camera when the game starts, and away from it when the game ends.
 
@@ -353,7 +353,7 @@ Now, back in your HTML file, replace the previous `script` element with this:
 
 The functionality of the game should be unchanged from before, but the code is now better organized, which will make things easier to manage going forwards.
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step5) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step5)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step5.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step5/index.html)
 
 Some notes on these changes:
 
@@ -424,7 +424,7 @@ Finally, in `title.js`, remove these lines - now that we are building some actua
   }, 3000)
 ```
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step6) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step6)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step6.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step6/index.html)
 
 With each mouse click, the white cube avatar advances one space.
 
@@ -536,7 +536,7 @@ if (this.el.object3D.position.x > 30) {
 
 Now the player can advance, and the game ends after they cross the 3rd road.
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step7) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step7)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step7.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step7/index.html)
 
 Some notes on this code:
 
@@ -622,7 +622,7 @@ initializeGameState()
 
 Now, every time we start the game, we reset the player's position to (0, 0, 0), meaning the player makes a fresh start, and gets to play the game again.
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step8) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step8)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step8.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step8/index.html)
 
 ### Keyboard Controls
 
@@ -652,7 +652,7 @@ Note that you will also need to add a comma (`,`) between the `stepForwards` and
 
 With this change, you should be able to move the avatar forwards using the space bar.
 
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step9) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step9)
+[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step9.html) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step9/index.html)
 
 To explain this code...
 
@@ -685,8 +685,6 @@ to read
 ```
 if (event.key === " " && !event.repeat) {
 ```
-
-[Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson2/step10) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson2/step10)
 
 Explaining this code...
 
@@ -728,5 +726,4 @@ We've also gained some familiarity with using Chrome DevTools for debugging.
 We now have a lot of the building blocks that we'll need to build out a functional (and hopefully fun!) little game.
 
 Next lesson, we'll get some traffic running on our roads, so that our little avatar has something to dodge!
-
 
