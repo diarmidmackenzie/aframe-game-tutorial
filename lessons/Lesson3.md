@@ -12,7 +12,62 @@ Click the Mouse, or press Space Bar to advance your cute little cube safely acro
 
 I'm going to introduce version control using Git and GitHub Desktop.
 
--- Still to complete this part of the tutorial -- 
+#### What is Git?
+
+Git is a distributed version control system.
+
+You can think of version control as like a "save game" option when you are coding.  But it's super-powerful, so you get a history of your progress from one save point to the next, and you can create multiple branches from a particular save point, and then merge them together later.
+
+The fact that Git is a *distributed* version control system means that it's great for collaboration.  Multiple users can make their own sets of changes from a particular point in a project history, and then merge them together later.
+
+Git was first developed by Linux Torvalds (the creator of Linux) in 2005, and it's now pretty much *the* standard tool for version control.
+
+#### What is GitHub Desktop?
+
+GitHub Desktop is a desktop client application that makes it easy to use Git for version control.
+
+It has integration with GitHub, which is a free service that can be used to save and publish your code online, but can be used for local version control using Git even if you don't use GitHub.
+
+You can install GitHub Desktop here:
+
+https://desktop.github.com/
+
+
+#### Creating your first Repository
+
+A **repository** (or **repo**) is the term used for a project that is under version control.
+
+You can convert the code you have already written into a repository using the menu option File\New repository...
+
+![image-20221007124741192](image-20221007124741192.png)
+
+Fill in the name (which should match the name of the folder that your code is in), description etc. and the path to your code (not including the final folder that's in the 	"Name" field), and click "Create repository".
+
+
+You should see something like this:
+
+![image-20221007124959435](image-20221007124959435.png)
+
+
+Switch to the "History" tab, and you should see your code has been added to the repository with the comment "Initial commit"
+
+![image-20221007125102227](image-20221007125102227.png)
+
+You can explore this commit in the panel on the right.
+
+Added lines are green, unchanged lines are white, and removed lines are red.  In this case, all the lines are green as they have just been added.
+
+We're learn more about how to use GitHub Desktop as we work through this lesson.
+
+Before we start coding, let's create a new branch for our work this lesson.  We'll do all our work on this branch, and when we complete the lesson, we'll merge it all back onto the main branch (called "main")
+
+From the menu choose Branch / New branch..., and create a branch called "lesson3"
+
+![image-20221007125319944](image-20221007125319944.png)
+
+We're now working on a new branch, called lesson3
+
+![image-20221007125457107](image-20221007125457107.png)
 
 
 
@@ -84,9 +139,168 @@ With these changes, we should see some vehicles (for now, they are just blue rec
 
 
 
-> Explanation of code to follow
+There's quite a lot of new code here - let's explain it...
+
+> ```
+> AFRAME.registerComponent('road', {
+> ```
+>
+> Just like in our last lesson, we are creating a new component.  This one is called `road`
+> 
+>
+> ```
+> schema: {
+>     numVehicles: { type : 'number', default: 10},
+>     speed: {type: 'number', default: 3},
+>   },
+> ```
+>
+> This defines the "schema" for our new component.
+>
+> This defines the individual properties that can be set within the attribute.  For each property we give it a name, a type (e.g. is it a number, a text string etc?) and, optionally, a default value to use if no value is specified.
+>
+> A full description of schemas for A-Frame components can be found [here](https://aframe.io/docs/1.3.0/core/component.html#schema)
+>
+> ```
+>   init() {
+>     this.vehicles = []
+> 
+>     for (var ii = 0; ii < this.data.numVehicles; ii++) {
+>       const vehicle = this.createVehicle(ii)
+>       this.vehicles.push(vehicle)
+>     }
+>   },
+> ```
+>
+> The `init` function is called when the component is initialized.
+>
+> This function starts by creating an empty Array (an array in JavaScript is an ordered list of objects), which is stored in this component instance as `this.vehicles`.
+>
+> The `for` line creates a loop which we will execute once for each vehicle that we want on the road.  Javascript for loops are explained in detail [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for).
+>
+> Looking at the 3 clauses inside the `for` declaration...
+>
+> ```
+> var ii = 0
+> ```
+>
+> This is our initialization.  It happens once, when the `for` loop is first executed.  We create a new variable called `ii`, and set it to 0.
+>
+> ```
+> ii < this.data.numVehicles
+> ```
+>
+> This is our condition.  We loop as long as this condition is met - i.e. until we have added the correct number of vehicles.
+>
+> ```
+> ii++
+> ```
+>
+> This is our "afterthought" - this gets executed after each iteration through the loop.
+>
+> The body of the loop itself invokes a function on this component `this.createVehicle`.  Then the object returned from `this.createVehicle` is "pushed" into our `this.vehicles` array.  Pushing an item onto an array just means adding it to the end of the list.
+>
+> Now, let's look at what `this.createVehicle()` actually does.
+>
+> ```
+>     const roadLength = this.roadLength()
+>     zPosition = (Math.random() * roadLength) - (roadLength / 2)
+> ```
+>
+> First, we set up a couple of bits of information we'll need to create the vehicle.
+>
+> - we get the length of the road (using yet another function, which we'll look at shortly)
+> - we pick a random point along this road.  `Math.random()` will give us a random number between 0 and 1.  We scale and adjust this to get a random number between `-(roadLength / 2)` and `(roadLength / 2)`
+
+> ```
+>  const vehicle = document.createElement('a-box')
+>  vehicle.setAttribute("depth", 2)
+>  vehicle.setAttribute("id", `${this.el.id}-vehicle-${index}`)
+>  vehicle.setAttribute("color", "blue")
+>  vehicle.object3D.position.set(0, 0.5, zPosition)
+>  this.el.appendChild(vehicle)
+> ```
+>
+> This code:
+>
+> - creates a new HTML Element using [`createElement`](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement)...
+> - ...sets various attributes on it...
+> - ...and adds it to the graph of HTML Elements as a child of `this.el` (i.e. whichever element the `road` attribute is set on)
+>
+> Whenever you create an element, it's essential to add it to the graph of HTML Elements using [`appendChild`](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild), or it won't actually be instantiated within the page.
+>
+> So the code effectively inserts the following HTML into the page for each vehicle:
+>
+> ```
+> <a-box depth=2; id="xxx-vehicle-xxx"; color="blue"; position="0 0.5 xxx">
+> </a-box>
+> ```
+>
+> But note that the specific values used in the `xxx`placeholders can be determined dynamically in code, whereas if we wrote this in an HTML file, we'd need to know in advance what values to set.
+>
+> A brief not on this code:
+>
+> ```
+> `${this.el.id}-vehicle-${index}`
+> ```
+>
+> The \` character is JavaScript is used to compose strings out of a mix of text and variable values.  The `${variable}` syntax is used to insert the value of a variable into a string.
+>
+> You could achieve the same thing using `+` to concatenate (i.e. join together) strings, like this:
+>
+> ```
+> this.el.id + "-vehicle-" + index
+> ```
+>
+> But the syntax using \` and `${variable}` is considered more readable and more modern, so it's preferable in most cases.
+>
+> ```
+>  return vehicle
+> ```
+>
+> The last line of code in `this.createVehicle()` returns the `vehicle` object created, so that it can be used by the calling code.  As we saw, the calling code pushes this object onto an array of vehicles.
+>
+> The final bit of code to explain is this:
+> ```
+>   roadLength() {
+>     return this.el.getAttribute("depth")
+>   }
+> ```
+>
+> This is a simple function to get the length of the road.  It extracts the `depth` attribute from the element, and uses that as the road length.
+>
+> Rather than having a function here, we could have simply written the following line within `createVehicle`
+>
+> ` const roadLength = this.el.getAttribute("depth")`
+>
+> The reason for breaking this out into a separate function is that by pulling this detail out into a separate function, we simplify `createVehicle` , making it easier to read and understand, without complicating it with the additional detail about how we figure out the length of the road.
 
 
+
+### Checking in our changes
+
+Switch back to GitHub Desktop, and you should see a display of all the changes that you have made.
+
+![image-20221007125629514](image-20221007125629514.png)
+
+
+The panel on the left shows each of the files you have modified, and when you select a file, the panel on the right shows the changes you have made.
+
+Check through these changes to make sure they match what you expected.  It's worth testing your code at this point too, to make sure that it is also *doing* what you expected.
+
+Now you are ready to make your first check-in.
+
+In the bottom left, fill in a summary of your check-in, and a brief description of your changes, and press the "Commit" button.    The description is optional, but information that you add here can be very useful later in figuring out what you were thinking when you made a particular change.
+
+![image-20221007130054234](image-20221007130054234.png)
+
+
+When you hit "Commit", you'll see that the repository no longer shows any changed files, but you now have an additional check-in in your History tab.
+
+
+![image-20221007130240764](image-20221007130240764.png)
+
+Going forwards, you should check in your changes at the end of each step.
 
 ### Making the vehicles move
 
@@ -121,7 +335,17 @@ vehicle.setAttribute("z-movement", {speed: this.data.speed})
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step2) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step2/index.html)
 
->  Explanation of code to follow
+Now check in these changes.
+
+Some notes on this code...
+
+>  We've created another new component here.  This one is responsible for driving movement on the z-axis at a fixed speed.
+>
+>  We could have done this using the `animation` component, but the looping behaviour that we want would be a bit fiddly to do in that way, so we've built our own very simple component to handle the z-axis movement.
+>
+>  The new concept here is the `tick` function.  This is a special function on an A-Frame component that is called every single frame.  It has two parameters, the current time, and the time since it was last called.  These are useful because the rate at which the `tick`function is called may vary depending on what else is going on in the system.  We can use the information in these parameters to ensure that movement occurs at a uniform speed, even if the frame rate is variable.
+
+
 
 ### Looping the vehicles
 
@@ -164,6 +388,8 @@ And finally, include values for the two new schema properties where we set `z-mo
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step3) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step3/index.html)
 
+Once again, check in these changes.
+
 >  Explanation of code to follow
 
 
@@ -205,6 +431,8 @@ And set this component on each vehicle by adding this line immediately after set
 ```
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step4) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step4/index.html)
+
+Don't forget to check in these changes.
 
 >  Explanation of code to follow
 
@@ -266,7 +494,7 @@ By wrapping the camera with an additional `camera-rig` entity, with the reverse 
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step6) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step6/index.html)
 
-
+Now would be a good time to check in your changes.
 
 >  Explanation of code to follow
 
@@ -297,6 +525,8 @@ this.thisBox.expandByScalar(-0.001)
 ```
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step7) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step7/index.html)
+
+Once again, check these changes in.
 
 
 
@@ -366,6 +596,7 @@ Finally, in `vehciles.js` remove the `alert` and replace it with this:
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step8) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step8/index.html)
 
+Check these changes work as you expect, and then check them in.
 
 
 >  Explanation of code to follow
@@ -389,9 +620,42 @@ In `title.js`, at the start of the `gameOver` function, add these lines:
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson3/step9) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson3/step9/index.html)
 
+For the final time this lesson, check these changes in.
+
+
+
 >  Explanation of code to follow
 
+### Merging back onto "main"
 
+Back in GitHub Desktop, you should be able to see all your changes, but these changes have only been made on the "lesson3" branch.
+
+Check that you have no outstanding changes, and then switch back to the "main" branch by clicking where it says "Current branch" in the top middle of the screen, and choosing "main".
+
+![image-20221007130844269](image-20221007130844269.png)
+
+Everything you did this lesson appears to have vanished - in GitHub Desktop *and* in VS Code.
+
+Don't worry - if you switch back to the "lesson3" branch, everything should be back as you left it.
+
+What we can do now is to merge out "lesson3" branch into "main", and this will bring all our changes across to the "main" branch.
+
+Viewing the "main" branch, from the menu choose Branch/Merge into current branch...  You should get a pop-up like this.
+
+![image-20221007131040404](image-20221007131040404.png)
+
+Select the "lesson3" branch, and click the "Create a merge commit" button.
+
+Now, all your changes (including the individual commits, summaries & descriptions are merged across into the "main" branch).
+
+Git will automatically merge whatever it can, so even if you'd made some changes on "main" in the meantime, you'd end up with both sets of changes in place on "main".  There are some exceptions, for example if the same line has been modified in two different ways on the two different branches.  In these cases, Git can't work out what it should do, so it reports a "conflict", and you need to manually edit the file to exactly how you want it.
+
+If you get into that situation, there's some guidance [here](https://gist.github.com/ccannon94/a75f1f725d33a1834dd7f5feebbc7d4b) that explains what to do.  But most of the time, merges like this just happen automatically.
+
+It's worth noting that we could have simply made all our commits directly onto "main".  We used a separate branch mostly to get you familiar with using branches.  Branches are especially useful for:
+
+- working on multiple sets of changes in parallel
+- Working on a set of changes to build a feature, where you don't want to risk break the function on the "main" branch with partly developed code.  You can do all your work on a branch, and then merge it back into "main" once you are completely happy with it.
 
 ### Recap
 
@@ -399,6 +663,7 @@ We've now got a very simple (and rather easy) game, where the user can succeed o
 
 In getting to this stage, we've used various new concepts.
 
+- version control with Git and GitHub Desktop, including 
 - schemas for A-Frame Components
 - `for` loops
 - Arrays
