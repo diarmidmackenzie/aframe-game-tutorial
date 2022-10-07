@@ -190,7 +190,7 @@ There's quite a lot of new code here - let's explain it...
 > ii < this.data.numVehicles
 > ```
 >
-> This is our condition.  We loop as long as this condition is met - i.e. until we have added the correct number of vehicles.
+> This is our condition.  We loop as long as this condition is met - i.e. until we have added the correct number of vehicles.  Note that all the data in the component's schema is accessible from within the component in the object `this.data`, so `this.data.numVehicles` contains the value passed into the component for the `numVehicles` property.
 >
 > ```
 > ii++
@@ -341,9 +341,11 @@ Some notes on this code...
 
 >  We've created another new component here.  This one is responsible for driving movement on the z-axis at a fixed speed.
 >
->  We could have done this using the `animation` component, but the looping behaviour that we want would be a bit fiddly to do in that way, so we've built our own very simple component to handle the z-axis movement.
+>  We could have done this using the `animation` component, but the looping behaviour that we want (coming next) would be a bit fiddly to do in that way, so we've built our own very simple component to handle the z-axis movement.
 >
 >  The new concept here is the `tick` function.  This is a special function on an A-Frame component that is called every single frame.  It has two parameters, the current time, and the time since it was last called.  These are useful because the rate at which the `tick`function is called may vary depending on what else is going on in the system.  We can use the information in these parameters to ensure that movement occurs at a uniform speed, even if the frame rate is variable.
+>
+>  In this case, we take the time since the last frame (in milliseconds), divide by 1000 to get this time in seconds, and multiply it by the desired speed, to determine the amount to move the entity by on this frame.
 
 
 
@@ -390,9 +392,13 @@ And finally, include values for the two new schema properties where we set `z-mo
 
 Once again, check in these changes.
 
->  Explanation of code to follow
+Some brief notes on this code...
 
-
+>  We've added two new properties to the `z-movement` schema, that allow us to specify points at which the entity should loop.  We've specified default values for these, though we don't actually use those.
+>
+>  Within the `z-movement` component, we've implemented the looping function.  So after moving the entity, we check whether it's exceeded the upper or lower limit, and if it has, we move it to the other end of the loop.
+>
+>  Finally, where we set the `z-movement` attribute, we set the two new parameters to appropriate values for this particular road (based on the `roadLength` that we already computed)
 
 ### Detecting collisions
 
@@ -434,7 +440,49 @@ And set this component on each vehicle by adding this line immediately after set
 
 Don't forget to check in these changes.
 
->  Explanation of code to follow
+Some notes on this code...
+
+>  ```
+>  AFRAME.registerComponent('collision-check', {
+>  ```
+>
+>  We've created another A-Frame component here.  This one is going to implement collision checking function.
+>
+>  ```
+>    schema: {
+>      target: {type: 'selector', default: '#player'}
+>    },
+>  ```
+>
+>  The schema has a property of type `selector`, which takes the value of a selector for an HTML element.  We saw selectors in Lesson 2.  The most common type of selector is an id selector, of the form `#<id>`, but there are [many other types of selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors).
+>
+>  In this component, the `target` property is used to specify an entity to check for collisions against.
+>
+>  ```
+>    init() {
+>  
+>      this.targetBox = new THREE.Box3()
+>      this.thisBox = new THREE.Box3()
+>    },
+>  ```
+>
+>  On initialization, the component creates two [`Box3`](https://threejs.org/docs/index.html?q=box3#api/en/math/Box3) objects, one to track its own bounds, the other to track the target's bounds.
+>
+>  ```
+>    tick() {
+>  
+>      this.targetBox.setFromObject(this.data.target.object3D)
+>      this.thisBox.setFromObject(this.el.object3D)
+>  
+>      if (this.thisBox.intersectsBox(this.targetBox)) {
+>        alert("collision!")
+>      }
+>    }
+>  ```
+>
+>  Every frame, the component updates the two `Box3`s based on the positions of the current object and the target, and then checks for collisions.
+>
+>  When a collision occurs, the `alert` command is called, which triggers a pop-up window in the browser.  That's not what we'll want for the final game, but it's a good start as we work on getting our collision detection working.
 
 ### Debugging collisions
 
@@ -456,7 +504,29 @@ This will output the two bounding boxes that are being checked for collisions.
 
 ![image-20220930131747431](image-20220930131747431.png)
 
-> Explanation of code to follow
+> There's quite a lot packed into that one line of code!
+>
+> `JSON.stringify()` is a function that converts an object into a text string that contains all the content of that object - very useful for debugging (among other uses).
+>
+> The `${<variable>}` syntax is the same as we saw above, allowing values of variables to be inserted into a string.  Note that to use  `${<variable>}` inside a string, the string must be declared with "backtick" quotes like this
+>
+> ```
+> `some text`
+> ```
+>
+> rather than single or double quotes like
+>
+> ```
+> "some text"
+> ```
+>
+> or
+>
+> ```
+> 'some text'
+> ```
+
+
 
 If we look at the "min" and "max" values for x, we can see that the box being checked is actually a lot more than 1 unit wide (6.18... - 4.81 = 1.37...)
 
@@ -496,9 +566,7 @@ By wrapping the camera with an additional `camera-rig` entity, with the reverse 
 
 Now would be a good time to check in your changes.
 
->  Explanation of code to follow
-
-
+>  In terms of the code here, we're just nesting the `game-camera` entity inside a new entity called `camera-rig`, and moving (and reversing) the `rotation` attribute from `gameArea` to `camera-rig`
 
 ### Fixing collisions (part 2)
 
@@ -528,9 +596,9 @@ this.thisBox.expandByScalar(-0.001)
 
 Once again, check these changes in.
 
-
-
->  Explanation of code to follow
+>  `expandByScalar` is a function available on a `THREE.Box3` as described [here](https://threejs.org/docs/index.html?q=box3#api/en/math/Box3.expandByScalar)
+>
+>  Slightly confusingly, expanding by a negative number results in the dimensions of the box being contracted, so we end up with a box that's 0.999m wide - just small enough to avoid collision with the adjacent box.
 
 ### Game Over!
 
@@ -588,7 +656,7 @@ function reset() {
 }
 ```
 
-Finally, in `vehciles.js` remove the `alert` and replace it with this:
+Finally, in `vehicles.js` remove the `alert` and replace it with this:
 
 ```
       this.el.emit("game-over")
@@ -598,8 +666,9 @@ Finally, in `vehciles.js` remove the `alert` and replace it with this:
 
 Check these changes work as you expect, and then check them in.
 
-
->  Explanation of code to follow
+>  There's no new concepts here, we are just adjusting the code to work a little differently.
+>
+>  If you don't remember how this code works, go back and look over the explanation in Lesson 1.
 
 ### Freeze!
 
@@ -622,9 +691,15 @@ In `title.js`, at the start of the `gameOver` function, add these lines:
 
 For the final time this lesson, check these changes in.
 
-
-
->  Explanation of code to follow
+>  `pause` and `play` are functions that can be called on any A-Frame entity, as described [here](https://aframe.io/docs/1.3.0/core/entity.html#pause).
+>
+>  The `pause` function will pause the entity, along with any of its descendants in the scene (i.e. its children, their children etc.).  The `play` function will restart them.
+>
+>  The main effect of pausing an entity is that the `tick()` function will no longer be called, for all components on that entity.
+>
+>  Components can declare `pause()` and `play()` functions that are called whenever the entity is paused/played, to implement any other changes that are needed.
+>
+>  One particular point to note is that any event listeners registered by a component can still be triggered even when a component is paused.  So for components that use event listeners, and can be paused, it's usual to provide a `pause()` function that removes all event listeners, and a `play()` function that adds them back again.
 
 ### Merging back onto "main"
 
@@ -663,7 +738,6 @@ We've now got a very simple (and rather easy) game, where the user can succeed o
 
 In getting to this stage, we've used various new concepts.
 
-- version control with Git and GitHub Desktop, including 
 - schemas for A-Frame Components
 - `for` loops
 - Arrays
@@ -672,5 +746,7 @@ In getting to this stage, we've used various new concepts.
 - `Box3` and collision detection, including finding and fixing various problems that can arise.
 - `pause` and `play` on parts of an A-Frame `scene`
 
-We've also learned how to use version control (using Git and GitHub Desktop) to keep track of our source code as it evolves.
+We've also learned how to use version control (using Git and GitHub Desktop) to keep track of our source code as it evolves, including checking in changes, branching and merging.
+
+
 
