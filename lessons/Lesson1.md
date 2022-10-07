@@ -247,7 +247,9 @@ To make the button have an effect, we need to write some JavaScript.
 
 Add this additional attribute to the button, again this should be just before the `>`closing brace for the initial `button` tag.
 
-```onClick="start()"```
+```
+onClick="start()"
+```
 
 And at the top of the document, just after this line:
 
