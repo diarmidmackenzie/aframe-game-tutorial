@@ -60,19 +60,3 @@ AFRAME.registerComponent('pacer-limits', {
   }
 })
 
-
-AFRAME.registerComponent('track-score', {
-  schema: {
-    player: { type: 'selector', default: "#player" },
-    display: { type: 'selector', default: "#score" }
-  },
-
-  init() {
-    this.score = 0;
-  },
-
-  tick() {
-    this.score = math.Max(this.data.player.object3D.position.x, this.score)
-    this.data.display.innerHTML = this.score
-  }
-})
