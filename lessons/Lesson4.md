@@ -184,79 +184,33 @@ The issue we have here is known as "z-fighting".  The 3D renderer tries to rende
 
 Back in lesson 2, we set the roads at a height of -0.99, whereas the green surface has a height of -1.  The intention of this was to avoid z-fighting, so why are we seeing it?
 
-Honestly, I'm not 100% sure, but my best guess is as follows...
-
-The renderer is comparing the distance from the camera of triangles that are very different from each other in terms of size and position: 
-
-- two very large green triangle that make up the play surface
-- vs. two long narrow black triangles that make up the road surface.
-
-My guess is that the way the renderer judges distance is prone to going wrong when it compares these two very different shapes.
-
-Given that the green background is just a background that fills the screen, it's height doesn't really matter, so a simple fix would be to move the play area down by a whole unit.
-
-We can easily do that like this:
+The issue here is that we aren't getting enough precision in our  "depth buffer".  We can fix it by setting this configuration on the camera
 
 ```
-<a-box color="green" position="0 -2 0" width="500" depth="500">
+near: 20	
 ```
 
-However, this creates another problem...
-
-Our roads are "boxes", so they have sides as well as a top surface.  When you move the green surface down, this reveals the sides of the boxes as well, which doesn't look right...
-![image-20221118125845046](image-20221118125845046.png)
-
-
-We can solve this by making the road into an `a-plane` rather than an `a-box`, but this requires a little bit of extra code.  The default orientation for a plane is vertical, so we need to rotate the road surface to get the plane orientation correct.
-
-However, our vehicles are children of the road, so by rotating the road, we'll rotate the vehicles as well, meaning they'll be moving vertically.  We could fix this by changing the vehicle movement onto a different axis, but that's likely to get confusing if we have to use a different set of axes for vehcile movement vs. player movement.
-
-A better solution is to separate the "road" that the vehicles are children of, from the "road surface" that's a plane.  We can rotate the road surface, without impacting the vehicles.
-
-
-The new code for our `createRoad()` function will look like this.
+so overall our camera config should look like this:
 
 ```
-  createRoad(index) {
-    const speed = this.getRoadSpeed(index)
-    const xPosition = this.getRoadPosition(index)
-
-    const road = document.createElement('a-entity')
-    road.setAttribute("id", `road-${index}`)
-    road.setAttribute("width", 1)
-    road.setAttribute("road", {numVehicles: 10,
-                               length: 500,
-                               speed: speed})
-    road.object3D.position.set(xPosition, -0.99, 0)
-    this.el.appendChild(road)
-
-    const roadSurface = document.createElement('a-plane')
-    roadSurface.setAttribute("color", "black")
-    roadSurface.setAttribute("height", 500)
-    roadSurface.setAttribute("width", 1)
-    roadSurface.setAttribute("rotation", "-90 0 0")
-    road.object3D.position.set(xPosition, -0.5, 0)
-    road.appendChild(roadSurface)
-
-    return road
-  },
+camera="active:false; fov:30; near: 20"
 ```
 
-And we need to make a couple of small changes to our `road` component as well:
+Here's a technical explanation of the issue, and how that helps...
 
-- Add another property to the schema:
-
-```
-    length:  { type : 'number', default: 500},
-```
-
-- And modify the `roadLength()` function like this:
-
-```
-  roadLength() {
-    return this.data.length
-  }
-```
+> The "depth buffer" is used when rendering shapes to determine what should be in front, and what should be behind.
+>
+> Our camera is configured with a "near plane" and a "far plane".  The camera does not render anything closer to the camera than the "near plane", or further from the camera than the "far plane".
+>
+> The [default values](https://aframe.io/docs/1.3.0/components/camera.html#properties) for these are 0.005 (5mm) for the near plane, and 10,000 (10km for the far plane)
+>
+> When working with the depth buffer, the renderer represents every possible value between the near plane & the far plane in a range from 0 to 1.
+>
+> For things up close, we need lots of precision, and for things far away, we can get away with less precision, so the mapping is set up so that a lot of that 0 to 1 range corresponds to values close to the camera.
+>
+> However, we have set up our camera with a "zoom" effect, about 50m above our play area.  That means that we're only using a small fraction of that 0 to 1 range for the depths of the objects we are actually rendering, to the point where we don't have enough precision to discriminate the 0.01m difference between the road surface and the play area.
+>
+> By moving our "near plane" out from 0.005 to 20, we get a lot more precision in our depth buffer in the area that we want to render.
 
 [Code](https://github.com/diarmidmackenzie/aframe-game-tutorial/blob/main/lessons/lesson4/step5) [Demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson4/step5/index.html)
 

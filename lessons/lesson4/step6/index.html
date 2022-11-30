@@ -17,13 +17,13 @@
       </a-text>
       <a-sky color="black"></a-sky>
       <a-entity id="camera-rig" rotation="0 -60 0" follow-entity="#camera-focus">
-          <a-entity id ="game-camera" position="0 50 80" camera="active:false; fov:30" rotation = "-25 -10 0">
+          <a-entity id ="game-camera" position="0 50 80" camera="active:false; fov:30; near: 20" rotation = "-25 -10 0">
           </a-entity>
       </a-entity>
 
       <!-- gameArea must be in world space for accurate collision detection-->
       <a-entity id="gameArea" visible="false">
-        <a-box color="green" position="0 -2 0" width="500" depth="500">
+        <a-box color="green" position="0 -1 0" width="500" depth="500">
         </a-box>
         <a-box id="player" color="white" game-controls position="0 0 0">
         </a-box>
