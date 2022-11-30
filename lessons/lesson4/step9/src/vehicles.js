@@ -2,7 +2,6 @@ AFRAME.registerComponent('road', {
 
   schema: {
     numVehicles: { type : 'number', default: 10},
-    length:  { type : 'number', default: 500},
     speed: {type: 'number', default: 3},
   },
 
@@ -34,7 +33,7 @@ AFRAME.registerComponent('road', {
   },
 
   roadLength() {
-    return this.data.length
+    return this.el.getAttribute("depth")
   }
 })
 
@@ -110,22 +109,16 @@ AFRAME.registerComponent('landscape', {
     const speed = this.getRoadSpeed(index)
     const xPosition = this.getRoadPosition(index)
 
-    const road = document.createElement('a-entity')
+    const road = document.createElement('a-box')
     road.setAttribute("id", `road-${index}`)
+    road.setAttribute("color", "black")
+    road.setAttribute("depth", 500)
     road.setAttribute("width", 1)
     road.setAttribute("road", {numVehicles: 10,
-                               length: 500,
                                speed: speed})
     road.object3D.position.set(xPosition, -0.99, 0)
-    this.el.appendChild(road)
 
-    const roadSurface = document.createElement('a-plane')
-    roadSurface.setAttribute("color", "black")
-    roadSurface.setAttribute("height", 500)
-    roadSurface.setAttribute("width", 1)
-    roadSurface.setAttribute("rotation", "-90 0 0")
-    road.object3D.position.set(xPosition, -0.5, 0)
-    road.appendChild(roadSurface)
+    this.el.appendChild(road)
 
     return road
   },
