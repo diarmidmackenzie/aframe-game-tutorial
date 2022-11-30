@@ -21,13 +21,13 @@
       </a-text>
       <a-sky color="black"></a-sky>
       <a-entity id="camera-rig" rotation="0 -60 0" follow-entity="#camera-focus">
-          <a-entity id ="game-camera" position="0 50 80" camera="active:false; fov:15" rotation = "-27 -10 0">
+          <a-entity id ="game-camera" position="0 50 80" camera="active:false; fov:15; near: 20" rotation = "-27 -10 0">
           </a-entity>
       </a-entity>
     
       <!-- gameArea must be in world space for accurate collision detection-->
       <a-entity id="gameArea" visible="false">
-        <a-box color="green" position="0 -2 0" width="500" depth="500">
+        <a-box color="green" position="0 -1 0" width="500" depth="500">
         </a-box>
         <a-entity id="player" color="white" game-controls position="0 0 0">
           <a-entity gltf-model="#robot-model" scale="0.3 0.3 0.3" rotation="0 90 0">

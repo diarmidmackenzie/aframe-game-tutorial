@@ -2,7 +2,6 @@ AFRAME.registerComponent('road', {
 
   schema: {
     numVehicles: { type : 'number', default: 10},
-    length:  { type : 'number', default: 500},
     speed: {type: 'number', default: 3},
   },
 
@@ -19,11 +18,10 @@ AFRAME.registerComponent('road', {
     const roadLength = this.roadLength()
     zPosition = (Math.random() * roadLength) - (roadLength / 2)
 
-    const vehicle = document.createElement('a-entity')
+    const vehicle = document.createElement('a-box')
     vehicle.setAttribute("depth", 2)
     vehicle.setAttribute("id", `${this.el.id}-vehicle-${index}`)
     vehicle.setAttribute("color", "blue")
-    
     vehicle.setAttribute("z-movement", {speed: this.data.speed,
                                         loopLower: -roadLength/2,
                                         loopUpper: roadLength/2})
@@ -31,22 +29,11 @@ AFRAME.registerComponent('road', {
     vehicle.object3D.position.set(0, 0.5, zPosition)
     this.el.appendChild(vehicle)
 
-    const vehicleModel = document.createElement('a-entity')
-    vehicleModel.setAttribute("gltf-model", "#car-model")
-    vehicleModel.setAttribute("position", "-0.9 0 0")
-    if (this.data.speed > 0) {
-      vehicleModel.setAttribute("scale", "0.5 0.5 0.5")
-    }
-    else {
-      vehicleModel.setAttribute("scale", "0.5 0.5 -0.5")
-    }
-    vehicle.appendChild(vehicleModel)
-
     return vehicle
   },
 
   roadLength() {
-    return this.data.length
+    return this.el.getAttribute("depth")
   }
 })
 
@@ -122,22 +109,16 @@ AFRAME.registerComponent('landscape', {
     const speed = this.getRoadSpeed(index)
     const xPosition = this.getRoadPosition(index)
 
-    const road = document.createElement('a-entity')
+    const road = document.createElement('a-box')
     road.setAttribute("id", `road-${index}`)
+    road.setAttribute("color", "black")
+    road.setAttribute("depth", 500)
     road.setAttribute("width", 1)
     road.setAttribute("road", {numVehicles: 10,
-                               length: 500,
                                speed: speed})
     road.object3D.position.set(xPosition, -0.99, 0)
-    this.el.appendChild(road)
 
-    const roadSurface = document.createElement('a-plane')
-    roadSurface.setAttribute("color", "black")
-    roadSurface.setAttribute("height", 500)
-    roadSurface.setAttribute("width", 1)
-    roadSurface.setAttribute("rotation", "-90 0 0")
-    road.object3D.position.set(xPosition, -0.5, 0)
-    road.appendChild(roadSurface)
+    this.el.appendChild(road)
 
     return road
   },
