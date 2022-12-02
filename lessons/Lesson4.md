@@ -102,7 +102,7 @@ We can add some variety by updating the `getRoadSpeed()` and `getRoadPosition()`
 
 ```
   getRoadSpeed(index) {
-    const speed = Math.sign(Math.random() - 0.5) * (10 + index + Math.random(10))
+    const speed = Math.sign(Math.random() - 0.5) * (10 + index + 10 * Math.random())
     return speed
   },
 

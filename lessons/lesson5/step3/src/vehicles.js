@@ -19,7 +19,6 @@ AFRAME.registerComponent('road', {
     zPosition = (Math.random() * roadLength) - (roadLength / 2)
 
     const vehicle = document.createElement('a-entity')
-    vehicle.setAttribute("depth", 2)
     vehicle.setAttribute("id", `${this.el.id}-vehicle-${index}`)
     vehicle.setAttribute("instanced-mesh-member", "mesh:#car-instanced-mesh")
     vehicle.setAttribute("z-movement", {speed: this.data.speed,
@@ -124,7 +123,7 @@ AFRAME.registerComponent('landscape', {
   },
 
   getRoadSpeed(index) {
-    const speed = Math.sign(Math.random() - 0.5) * (10 + index + Math.random(10))
+    const speed = Math.sign(Math.random() - 0.5) * (10 + index + 10 * Math.random())
     return speed
   },
 
