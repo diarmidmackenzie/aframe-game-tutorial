@@ -2,7 +2,7 @@
 
 In this lesson we extend the game to have a lot more roads to cross, and we start to scroll the camera view.
 
-See this [demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson4/step19/index.html) for a preview of what we're going to get to by the end of this lesson.
+See this [demo](https://diarmidmackenzie.github.io/aframe-game-tutorial/lessons/lesson4/step10/index.html) for a preview of what we're going to get to by the end of this lesson.
 
 This is the first time you may have trouble completing the demo game.  The traffic gets pretty fast towards the end, but it is possible to cross safely.
 

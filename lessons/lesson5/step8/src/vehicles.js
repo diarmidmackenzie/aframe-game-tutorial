@@ -26,9 +26,7 @@ AFRAME.registerComponent('road', {
     vehicle.object3D.rotation.set(0, this.data.speed < 0 ? Math.PI : 0, 0)
     vehicle.object3D.position.set(0, 0.5, zPosition)
     vehicle.object3D.scale.set(0.5, 0.5, 0.5)
-    vehicle.object3D.updateMatrixWorld()
-    // delay rendering to instanced mesh to avoid visual glitches
-    setTimeout(() => vehicle.setAttribute("instanced-mesh-member", "mesh:#car-instanced-mesh"), 500)
+    vehicle.setAttribute("instanced-mesh-member", "mesh:#car-instanced-mesh")
     this.el.appendChild(vehicle)
 
     const collider = document.createElement('a-box')
@@ -87,7 +85,7 @@ AFRAME.registerComponent('collision-check', {
     this.thisBox = new THREE.Box3()
   },
 
-  tick() {
+  tock() {
 
     this.targetBox.setFromObject(this.data.target.object3D)
     this.thisBox.setFromObject(this.el.object3D)
@@ -132,7 +130,6 @@ AFRAME.registerComponent('landscape', {
     road.setAttribute("depth", 500)
     road.setAttribute("width", 1)
     road.object3D.position.set(xPosition, -0.99, 0)
-    road.object3D.updateMatrixWorld()
     road.setAttribute("road", {numVehicles: 10,
                                speed: speed})
     this.el.appendChild(road)

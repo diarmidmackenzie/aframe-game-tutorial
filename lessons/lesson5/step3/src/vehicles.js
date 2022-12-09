@@ -26,6 +26,7 @@ AFRAME.registerComponent('road', {
                                         loopUpper: roadLength/2})
     vehicle.setAttribute("collision-check", "target: #player")
     vehicle.object3D.position.set(0, 0.5, zPosition)
+    vehicle.object3D.scale.set(0.5, 0.5, 0.5)
     this.el.appendChild(vehicle)
 
     return vehicle
