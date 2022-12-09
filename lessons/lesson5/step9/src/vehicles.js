@@ -3,20 +3,43 @@ AFRAME.registerComponent('road', {
   schema: {
     numVehicles: { type : 'number', default: 10},
     speed: {type: 'number', default: 3},
+    minDistance: {type: 'number', default: 4},
   },
 
   init() {
     this.vehicles = []
 
+    zPositions = []
     for (var ii = 0; ii < this.data.numVehicles; ii++) {
-      const vehicle = this.createVehicle(ii)
+      const vehicle = this.createVehicle(ii, zPositions, this.data.minDistance)
       this.vehicles.push(vehicle)
     }
   },
 
-  createVehicle(index) {
-    const roadLength = this.roadLength()
-    zPosition = (Math.random() * roadLength) - (roadLength / 2)
+  createVehicle(index, zPositions, minDistance) {
+    const roadLength = this.roadLength() - minDistance
+
+    function getAvailableZPosition(length) {
+
+      let finalPosition
+      const testPosition = (Math.random() * length) - (length / 2)
+
+      function tooClose(value) {
+        return (Math.abs(value - testPosition) < minDistance)
+      }
+
+      if (zPositions.filter(tooClose).length === 0) {
+        finalPosition = testPosition
+      }
+      else {
+        getAvailableZPosition(length)
+      }
+
+      return finalPosition
+    }
+
+    zPosition = getAvailableZPosition(roadLength)
+    zPositions.push(zPosition)
 
     const vehicle = document.createElement('a-entity')
     vehicle.setAttribute("id", `${this.el.id}-vehicle-${index}`)
@@ -27,8 +50,11 @@ AFRAME.registerComponent('road', {
     vehicle.object3D.position.set(0, 0.5, zPosition)
     vehicle.object3D.scale.set(0.5, 0.5, 0.5)
     vehicle.object3D.updateMatrixWorld()
-    // delay rendering to instanced mesh to avoid visual glitches
-    setTimeout(() => vehicle.setAttribute("instanced-mesh-member", "mesh:#car-instanced-mesh"), 500)
+    colorString = `#${Math.floor(Math.random()*4096).toString(16).padStart(3, "0")}`
+    vehicle.setAttribute("instanced-mesh-member",
+                         `mesh:#car-instanced-mesh;
+                          memberMesh: true;
+                          colors: ${colorString}`)
     this.el.appendChild(vehicle)
 
     const collider = document.createElement('a-box')

@@ -29,12 +29,13 @@
       </a-entity>
     
       <!-- gameArea must be in world space for accurate collision detection-->
-      <a-entity id="gameArea" visible="false">
+      <a-entity id="gameArea" pause visible="false">
         <a-entity id="car-instanced-mesh"
         gltf-model="#car-model"
         instanced-mesh="capacity:1000;
                         positioning: world;
-                        updateMode: auto">
+                        updateMode: auto;
+                        drainColor: true">
         </a-entity>
         <a-box color="green" position="0 -1 0" width="500" depth="500">
         </a-box>
@@ -45,7 +46,7 @@
         </a-entity>
         <a-entity id="camera-focus" position="0 0 0" pacer-movement>
         </a-entity>
-        <a-entity landscape="center:#camera-focus; numRoadsAhead: 20; numRoadsBehind: 20">
+        <a-entity id="landscape" landscape="center:#camera-focus; numRoadsAhead: 20; numRoadsBehind: 20">
         </a-entity>
       </a-entity>
 
