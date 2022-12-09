@@ -49,7 +49,6 @@ AFRAME.registerComponent('road', {
     vehicle.object3D.rotation.set(0, this.data.speed < 0 ? Math.PI : 0, 0)
     vehicle.object3D.position.set(0, 0.5, zPosition)
     vehicle.object3D.scale.set(0.5, 0.5, 0.5)
-    vehicle.object3D.updateMatrixWorld()
     colorString = `#${Math.floor(Math.random()*4096).toString(16).padStart(3, "0")}`
     vehicle.setAttribute("instanced-mesh-member",
                          `mesh:#car-instanced-mesh;
@@ -158,7 +157,6 @@ AFRAME.registerComponent('landscape', {
     road.setAttribute("depth", 500)
     road.setAttribute("width", 1)
     road.object3D.position.set(xPosition, -0.99, 0)
-    road.object3D.updateMatrixWorld()
     road.setAttribute("road", {numVehicles: 10,
                                speed: speed})
     this.el.appendChild(road)

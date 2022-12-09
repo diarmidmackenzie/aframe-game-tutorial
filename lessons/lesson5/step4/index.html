@@ -8,7 +8,7 @@
     <script src="./src/vehicles.js"></script>
   </head>
   <body>
-    <a-scene vr-mode-ui="enabled: false">
+    <a-scene vr-mode-ui="enabled: false" stats>
       <a-assets>
         <a-asset-item id="robot-model" src="../../../assets/Robot.gltf"></a-asset-item>
         <a-asset-item id="car-model" src="../../../assets/NormalCar1.gltf"></a-asset-item>
@@ -37,10 +37,10 @@
       <a-entity id="gameArea" visible="false">
         <a-box color="green" position="0 -1 0" width="500" depth="500">
         </a-box>
-        <a-entity id="player" color="white" game-controls position="0 0 0">
+        <a-entity id="player" game-controls position="0 0 0">
           <a-entity gltf-model="#robot-model" scale="0.3 0.3 0.3" rotation="0 90 0" position="0 -0.6 0">
           </a-entity>
-          <a-box id="player-collider" material="wireframe:true" visible="false"></a-box>
+          <a-box id="player-collider" material="wireframe:true"></a-box>
         </a-entity>
         <a-entity id="camera-focus" position="0 0 0" pacer-movement>
         </a-entity>

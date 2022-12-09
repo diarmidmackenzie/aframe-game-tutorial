@@ -85,7 +85,7 @@ AFRAME.registerComponent('collision-check', {
     this.thisBox = new THREE.Box3()
   },
 
-  tick() {
+  tock() {
 
     this.targetBox.setFromObject(this.data.target.object3D)
     this.thisBox.setFromObject(this.el.object3D)

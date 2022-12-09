@@ -9,12 +9,12 @@ function start() {
 
   const gameArea = document.getElementById("gameArea")
   
-  initializeGameState()
-  setActiveCamera("game-camera")
-  
   gameArea.play()
   gameArea.setAttribute("visible", true)
-  
+
+  initializeGameState()
+  setActiveCamera("game-camera")
+
   addEventListener("game-over", gameOver)
 }
 
@@ -41,7 +41,7 @@ function reset() {
 
   const gameOverButton = document.getElementById("game-over")
   gameOverButton.style.display = "none"
-
+ 
   setActiveCamera("title-camera")
 }
 
@@ -66,7 +66,6 @@ function initializeGameState() {
 
   const player = document.getElementById("player")
   player.object3D.position.set(0, 0, 0)
-  player.object3D.updateMatrixWorld()
 
   const cameraFocus = document.getElementById("camera-focus")
   cameraFocus.object3D.position.set(0, 0, 0)
